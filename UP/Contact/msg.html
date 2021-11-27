@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="keywords" content="袋井市,浅羽,スマイル歯科,一般歯科,小児歯科,歯科口腔外科">
+<meta name="description" content="袋井市浅羽のスマイル歯科はのお問い合わせはこちらから。一般歯科から、小児歯科、歯科口腔外科まで対応。当院には技工士が常勤しておりますので、細かな要望や短時間での義歯修理が可能です。">
+<title>お問い合わせ｜袋井市浅羽のスマイル歯科｜一般歯科　小児歯科　歯科口腔外科</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap4-print.css" rel="stylesheet">
+<link href="css/all.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/hamburgers.css" rel="stylesheet">
+<script src="js/viewport-extra.min.js"></script>
+</head>
+<body class="contact">
+<header class="main_header">
+  <div class="inner">
+    <h1 class="logo"><a href="index.html"><img src="images/logo.png" alt="袋井市浅羽のスマイル歯科は、一般歯科から、小児歯科、歯科口腔外科まで対応。技工士が常駐していますのでご安心して義歯の修理が可能です。" width="201" height="59"></a></h1>
+    <div class="main_nav_container">
+      <div class="inner">
+        <nav class="main_nav">
+          <ul>
+            <li><a href="index.html"><img src="images/nav_icon01.png" alt="" width="36" height="36">ホーム<span class="en">Home</span></a></li>
+            <li><a href="about.html"><img src="images/nav_icon02.png" alt="" width="36" height="36">スマイル歯科について<span class="en">About Us</span></a></li>
+            <li><a href="medical.html"><img src="images/nav_icon03.png" alt="" width="36" height="36">診療案内<span class="en">Medical</span></a></li>
+            <li><a href="about2.html"><img src="images/nav_icon02.png" alt="" width="36" height="36">大東診療所について<span class="en">About Us</span></a></li>
+            <!-- <li><a href="checkup.html"><img src="images/nav_icon04.png" alt="" width="36" height="36">定期健診<span class="en">Check Up</span></a></li> -->
+                        <!-- <li class="active"><a href="contact.html"><img src="images/nav_icon05.png" alt="" width="36" height="36">お問い合わせ<span class="en">Contact</span></a></li> -->
+
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="tel_box">
+    <p class="cb"><span data-action="call"><img src="images/tel.png" alt="0538-23-6480 ご予約・お問い合わせ" width="251" height="88"></span></p>
+  </div> -->
+  <div class="hamburger hamburger--collapse">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </div>
+</header>
+<!-- /#header -->
+<header class="page-ttl">
+  <h2 class="fade_action fadein"><span class="main">お問い合わせ</span>
+    <span class="sub">Contact</span></h2>
+</header>
+<main>
+
+
+  <!-- /#main01 -->
+  <section id="main02" class="common-cont pbb">
+    <div class="fluid">
+      <div class="container-fluid">
+        <div class="headline-outer fade_action fadein_y_u">
+          <div class="headline text-center">
+            <h3 class="headline02">メールフォームでのお問い合わせ</h3>
+          </div>
+        </div>
+        <div class="row fade_action fadein_y_u">
+          <div class="col-12">
+
+
+
+
+
+
+<?php if(isset($confirm_data)): ?>
+<!--↓↓↓----------入力内容確認----------↓↓↓-->
+
+<p class="small mb15 m_center">以下の内容でよろしければ送信ボタンを押して下さい</p>
+
+<?php echo $this->Form->create('MailSend',array('url'=>array('controller'=>$this->request['controller'],'action'=>'postmail','thanks.html'), 'class' => 'form-horizontal h-adr fsc'));?>
+
+<?php echo $this->Form->input('send',array('type'=>'hidden','value'=>1, 'label'=>false,'div'=>false));?>
+<table class="table mb mb50 xs-mb25">
+<?php foreach($confirm_data as $key => $value): ?>
+<tr>
+<th><label class="control-label" ><?php echo $key;?></label></th>
+<td>
+<?php if(!is_array($value)): ?><!-- 通常のフィールド -->
+<?php echo nl2br(h($value)); ?>
+<?php echo $this->Form->input($key,array('type'=>'hidden','value'=>h($value), 'label'=>false,'div'=>false));?>
+<?php elseif(isset($value['isfile'])): ?><!-- 添付ファイル -->
+<?php if($value['error'] == 0): ?><!-- 添付ファイルが存在した場合 -->
+<a href="<?php echo $this->element('media',array('var'=>array('id'=>$value['id'],'download'=>true)))?>"><?php echo h($value['file_full_value'])?></a>
+<input type="hidden" name="data[File][<?php echo $value['field']?>][id]" value="<?php echo $value['id']?>" />
+<input type="hidden" name="data[File][<?php echo $value['field']?>][title]" value="<?php echo h($value['title'].'.'.$value['ext'])?>" />
+<input type="hidden" name="data[File][<?php echo $value['field']?>][size]" value="<?php echo $value['size']?>" />
+<input type="hidden" name="data[File][<?php echo $value['field']?>][ext]" value="<?php echo $value['ext']?>" />
+<?php else: ?><!-- 添付ファイルが存在しない場合 -->
+<?php echo nl2br(h($value['file_full_value'])); ?>
+<?php endif; ?>
+<?php echo $this->Form->input($key,array('type'=>'hidden','value'=>h($value['file_full_value']), 'label'=>false,'div'=>false));?>
+<?php ?>
+<?php else: ?><!-- チェックボックス -->
+<?php foreach($value as $k => $v ){
+	if    ($v === '' ) {}
+	elseif($k === 'y') {echo nl2br(h($v))."年";}
+	elseif($k === 'm') {echo nl2br(h($v))."月";}
+	elseif($k === 'd') {echo nl2br(h($v))."日";}
+	elseif($k === 't') {echo nl2br(h($v))."時";}
+	else               {echo "■".nl2br(h($v));}
+	echo $this->Form->input($key.']['.$k,array('type'=>'hidden','value'=>h($v), 'label'=>false,'div'=>false));
+}
+?>
+
+
+<?php endif; ?>
+&nbsp;
+</td>
+</tr>
+<?php endforeach; ?>
+</table>
+<br>
+<div class="text-center">
+	<button type="button" onclick="history.back()" class="btn btn-original btn_back large xs-mt10"><i class="fa fa-caret-left pr10" aria-hidden="true"></i>入力画面に戻る</button>
+	<button type="submit" class="btn btn-original large">送信する<i class="fa fa-caret-right pl10" aria-hidden="true"></i></button>
+</div>
+
+<?php echo $this->Form->end();?>
+
+<!------------------------------------------------>
+<?php elseif(isset($error_data)): ?>
+<!--↓↓↓-----------入力エラー-----------↓↓↓-->
+
+<p class="small mb15 m_center">入力内容に誤りがあります。<br />
+前画面に戻って正しく入力してください。</p>
+
+<?php echo $this->Form->create('MailSend',array('url'=>array('controller'=>$this->request['controller'],'action'=>'postmail'), 'class' => 'form-horizontal h-adr fsc'));?>
+<table class="table mb mb50 xs-mb25">
+<?php foreach($error_data as $key => $value): ?>
+<tr>
+<input name="<?php echo $key;?>" type="hidden" value="<?php echo $value;?>" />
+<th><label class="control-label" ><?php echo $key;?></label></th>
+<td style="color:red;"><?php echo $value;?></td>
+</tr>
+<?php endforeach;?>
+</table>
+<br>
+<div class="text-center">
+	<button type="button" onclick="history.back()" class="btn btn-original btn_back large xs-mt10"><i class="fa fa-caret-left pr10" aria-hidden="true"></i>入力画面に戻る</button>
+</div>
+<?php echo $this->Form->end();?>
+
+<!------------------------------------------------>
+<?php endif; ?>
+
+</div>
+</div>
+<!-- /.row -->
+</div>
+</div>
+</section>
+<!-- /#main02 -->
+</main>
+<footer id="footer" class="">
+<div class="t_inner">
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 col-md-6 xs-mb30 fade_action fadein_y_u">
+<div class="row mb40 xs-mb20">
+	<div class="col-12 col-md-6 xs-mb15 text-center">
+		<p class="mb10"><a href="index.html"><img src="images/footer_logo.png" alt="医療法人社団瑞歯 スマイル歯科" width="201" height="59"></a></p>
+		<p class="small">〒437-1101　<br class="d-none d-md-inline d-xl-none">静岡県袋井市浅羽114-3</p>
+	</div>
+	<div class="col-12 col-md-6 text-center">
+		<span data-action="call"><img src="images/tel.png" alt="0538-23-6480 ご予約・お問い合わせ" width="251" height="88"></span>
+	</div>
+</div>
+<!-- <p class="text-center text-md-left"><a href="contact.html" class="btn large no_icon"><i class="fas fa-envelope yellow pr10 x-large"></i><strong>メールフォーム</strong></a></p> -->
+
+</div>
+<div class="col-12 col-md-6 fade_action fadein_y_u">
+<p><img src="images/time.png" alt="診療スケジュール" width="549" height="141"></p>
+<p class="small indent mt5"><span class="icon blue">▲</span>土曜午後は14:30～18:30の診療となります。</p>
+<p class="small indent red"><span class="icon">※</span>新型コロナウイルス感染拡大により、診療時間・休診日等が記載と異なる場合がございますのでご注意ください。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="inner">
+<div class="container-fluid">
+<div class="row no-gutters">
+<div class="col-12">
+<nav class="footer_menu">
+	<ul class="footer_menu-list">
+		<li><a href="index.html">ホーム</a></li>
+		<li><a href="about.html">スマイル歯科について</a></li>
+		<li><a href="about2.html">大東診療所について</a></li>
+		<li><a href="medical.html">診療案内</a></li>
+		<!-- <li><a href="checkup.html">定期健診</a></li> -->
+		<!-- <li><a href="contact.html">お問い合わせ</a></li> -->
+
+	</ul>
+</nav>
+<p class="copyright sans">&copy;2021 医療法人社団瑞歯</p>
+
+</div>
+</div>
+</div>
+</div>
+</footer>
+<p class="back-top"><img src="images/pagetop.png" width="50" height="50" alt="Page Top"></p>
+<p class="line_icon"><a href="https://social-plugins.line.me/lineit/share?url=https%3A%2F%2Fline.me%2Fen" target="_blank" class="opacity"><img src="images/icon_line.png" width="50" height="50" alt="LINE"></a></p>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/tel.js"></script>
+<script src="js/ofi.min.js"></script>
+<script src="js/jquery.matchHeight.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/not_enter.js"></script>
+</body>
+</html>
